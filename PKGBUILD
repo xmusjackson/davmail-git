@@ -1,14 +1,14 @@
 # Contributor: Christian Hegerstroem <viking-dot-chris-at-live-dot-org>
 # Maintainer: Christian Hegerstroem <viking-dot-chris-at-live-dot-org>
 _pkgpref=davmail
-pkgname=$_pkgpref-git
-pkgver=$(git ls-remote https://github.com/mguessan/davmail HEAD | awk '{print $1}' | cut -b1-8)
+pkgname=davmail-git
+pkgver=6.0.1.ee43a5bb
 pkgrel=1
 pkgdesc="a POP/IMAP/SMTP/Caldav/LDAP gateway for the exchange service"
 arch=('i686' 'x86_64' 'armv7h' 'aarch64')
 url="https://github.com/mguessan/davmail"
 license=('GPL2')
-makedepends=('unzip' 'jdk11-openjdk' 'ant')
+makedepends=('unzip' 'java-runtime' 'ant')
 depends=('java-runtime')
 conflicts=('davmail')
 optdepends=('java-openjfx: Office 365 browser based authentication'
@@ -24,23 +24,16 @@ md5sums=('SKIP'
          '1eb24ff2a814058e55846a8e8f238f9b'
          '8d373851babe1d8bb860228c8b4db702'
          '271e9e66dfdb496d242c9a6102937c65')
-install=$_pkgpref.install
 
 build() {
-  
-  rm -rf $srcdir/lib $srcdir/$_pkgpref.jar $pkgdir/*
-
   cd $srcdir/$_pkgpref
   ant compile-java jar
-  rm -rf $srcdir/lib $srcdir/$_pkgpref.jar
-  mv lib/ $srcdir
-  mv dist/davmail.jar $srcdir
 }
 
 package() {
   install -d $pkgdir/{usr/share/java/$_pkgpref/lib,usr/bin,etc/$_pkgpref}
-  install -Dm644 $_pkgpref.jar $pkgdir/usr/share/java/$_pkgpref/
-  install -D lib/* $pkgdir/usr/share/java/$_pkgpref/lib
+  install -Dm644 $srcdir/$_pkgpref/dist/$_pkgpref.jar $pkgdir/usr/share/java/$_pkgpref/
+  install -D $srcdir/$_pkgpref/lib/* $pkgdir/usr/share/java/$_pkgpref/lib
   install -Dm755 $srcdir/$_pkgpref.sh $pkgdir/usr/share/java/$_pkgpref
   ln -s /usr/share/java/$_pkgpref/$_pkgpref.sh $pkgdir/usr/bin/$_pkgpref
   install -Dm644 $srcdir/$_pkgpref.desktop ${pkgdir}/usr/share/applications/$_pkgpref.desktop
@@ -48,7 +41,7 @@ package() {
   install -Dm644 $srcdir/$_pkgpref\@.user_service ${pkgdir}/usr/lib/systemd/user/$_pkgpref\@.service
 
   # Create icons
-  unzip -q $_pkgpref.jar tray.png tray32.png tray48.png tray128.png
+  unzip -q $srcdir/$_pkgpref/dist/$_pkgpref.jar tray.png tray32.png tray48.png tray128.png
   install -Dm644 tray.png ${pkgdir}/usr/share/icons/hicolor/16x16/apps/$_pkgpref.png
   install -Dm644 tray32.png ${pkgdir}/usr/share/icons/hicolor/32x32/apps/$_pkgpref.png
   install -Dm644 tray48.png ${pkgdir}/usr/share/icons/hicolor/48x48/apps/$_pkgpref.png
