@@ -3,7 +3,6 @@ pkgbase = davmail-git
 	pkgver = 6.0.1-ee43a5bb
 	pkgrel = 1
 	url = https://github.com/mguessan/davmail
-	install = davmail.install
 	arch = i686
 	arch = x86_64
 	arch = armv7h
