@@ -2,7 +2,7 @@
 # Maintainer: Christian Hegerstroem <viking-dot-chris-at-live-dot-org>
 _pkgpref=davmail
 pkgname=davmail-git
-pkgver=6.0.1.ee43a5bb
+pkgver=6.2.1.r19.g2caed4b
 pkgrel=1
 pkgdesc="a POP/IMAP/SMTP/Caldav/LDAP gateway for the exchange service"
 arch=('i686' 'x86_64' 'armv7h' 'aarch64')
@@ -24,6 +24,10 @@ md5sums=('SKIP'
          '1eb24ff2a814058e55846a8e8f238f9b'
          '8d373851babe1d8bb860228c8b4db702'
          '271e9e66dfdb496d242c9a6102937c65')
+pkgver() {
+  cd davmail
+  git describe --long --abbrev=7 | sed 's/^foo-//;s/\([^-]*-g\)/r\1/;s/-/./g'
+}
 
 build() {
   cd $srcdir/$_pkgpref
