@@ -21,7 +21,7 @@ source=("git+https://github.com/mguessan/davmail"
         $_pkgpref@.user_service)
 md5sums=('SKIP'
          '1df37a6120d88de8df3cb735977336ba'
-         '1eb24ff2a814058e55846a8e8f238f9b'
+         '35ea07aab73479b72128cdd0a31a9083'
          '8d373851babe1d8bb860228c8b4db702'
          '271e9e66dfdb496d242c9a6102937c65')
 pkgver() {
