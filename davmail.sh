@@ -10,5 +10,5 @@ fi
 
 JFX_CLASSPATH=/usr/lib/jvm/default-runtime/lib/javafx-base.jar:/usr/lib/jvm/default-runtime/lib/javafx-controls.jar:/usr/lib/jvm/default-runtime/lib/javafx-fxml.jar:/usr/lib/jvm/default-runtime/lib/javafx-graphics.jar:/usr/lib/jvm/default-runtime/lib/javafx-media.jar:/usr/lib/jvm/default-runtime/lib/javafx-swing.jar:/usr/lib/jvm/default-runtime/lib/javafx-web.jar
 DAVMAIL_HOME=/usr/share/davmail
-#exec "$JAVA_HOME/bin/java" -jar "$DAVMAIL_HOME/davmail.jar" "$@"
+
 SWT_GTK3=0 exec java $JAVA_OPTS -cp $DAVMAIL_HOME/davmail.jar:${JFX_CLASSPATH}:$DAVMAIL_HOME/lib/* davmail.DavGateway "$@"
